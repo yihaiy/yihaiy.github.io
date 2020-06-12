@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Capture in the ether</title>
+    <url>/2020/06/12/Capture%20in%20the%20ether/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="Capture-in-the-ether"><a href="#Capture-in-the-ether" class="headerlink" title="Capture in the ether"></a>Capture in the ether</h1><h2 id="Account-Takeover"><a href="#Account-Takeover" class="headerlink" title="Account Takeover"></a>Account Takeover</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.21</span>;</span><br><span class="line"></span><br><span class="line">contract AccountTakeoverChallenge &#123;</span><br><span class="line">    address owner = <span class="number">0x6B477781b0e68031109f21887e6B5afEAaEB002b</span>;</span><br><span class="line">    bool public isComplete;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">authenticate</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(msg.sender == owner);</span><br><span class="line"></span><br><span class="line">        isComplete = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>题目的意思非常直接，就是要我们获取到地址<code>0x6B477781b0e68031109f21887e6B5afEAaEB002b</code>的私钥。</p>
+<p>我们知道以太坊使用的签名方式是ECDSA椭圆加密，回顾一下椭圆加密算法曾经出现的漏洞，在2010年索尼的ps3游戏机所采用的ECDSA签名算法就被爆出使用的一直是同样的随机数k，这意味着随便找到一个私钥签署的两个签名就能恢复出该私钥。我们顺着这个思路查找到了该地址的第一笔和第二笔交易，可以看到其r值是一样的，也就是说这两笔交易使用来同样的随机数种子k，当然以太坊对随机数冲突做了防护，这里明显是出题人故意使用相同的随机数来部署的交易。</p>
+<p><img src="/home/miyako/.config/Typora/typora-user-images/image-20200526160406416.png" alt="image-20200526160406416"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Typora入门</title>
     <url>/2020/06/12/Typora%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h1 id="Typora入门"><a href="#Typora入门" class="headerlink" title="Typora入门"></a>Typora入门</h1><p>先试试目录吧</p>
@@ -92,17 +103,6 @@
 <li><p>高亮：==亮吧皮卡丘==！！没反应，找找设置里面是不是有开关</p>
 </li>
 </ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>Capture in the ether</title>
-    <url>/2020/06/12/Capture%20in%20the%20ether/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h1 id="Capture-in-the-ether"><a href="#Capture-in-the-ether" class="headerlink" title="Capture in the ether"></a>Capture in the ether</h1><h2 id="Account-Takeover"><a href="#Account-Takeover" class="headerlink" title="Account Takeover"></a>Account Takeover</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.21</span>;</span><br><span class="line"></span><br><span class="line">contract AccountTakeoverChallenge &#123;</span><br><span class="line">    address owner = <span class="number">0x6B477781b0e68031109f21887e6B5afEAaEB002b</span>;</span><br><span class="line">    bool public isComplete;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">authenticate</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(msg.sender == owner);</span><br><span class="line"></span><br><span class="line">        isComplete = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>题目的意思非常直接，就是要我们获取到地址<code>0x6B477781b0e68031109f21887e6B5afEAaEB002b</code>的私钥。</p>
-<p>我们知道以太坊使用的签名方式是ECDSA椭圆加密，回顾一下椭圆加密算法曾经出现的漏洞，在2010年索尼的ps3游戏机所采用的ECDSA签名算法就被爆出使用的一直是同样的随机数k，这意味着随便找到一个私钥签署的两个签名就能恢复出该私钥。我们顺着这个思路查找到了该地址的第一笔和第二笔交易，可以看到其r值是一样的，也就是说这两笔交易使用来同样的随机数种子k，当然以太坊对随机数冲突做了防护，这里明显是出题人故意使用相同的随机数来部署的交易。</p>
-<p><img src="/home/miyako/.config/Typora/typora-user-images/image-20200526160406416.png" alt="image-20200526160406416"></p>
 ]]></content>
   </entry>
   <entry>
