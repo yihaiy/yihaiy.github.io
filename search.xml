@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Capture in the ether</title>
+    <url>/2020/06/12/Capture%20in%20the%20ether/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="Capture-in-the-ether"><a href="#Capture-in-the-ether" class="headerlink" title="Capture in the ether"></a>Capture in the ether</h1><h2 id="Account-Takeover"><a href="#Account-Takeover" class="headerlink" title="Account Takeover"></a>Account Takeover</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.21</span>;</span><br><span class="line"></span><br><span class="line">contract AccountTakeoverChallenge &#123;</span><br><span class="line">    address owner = <span class="number">0x6B477781b0e68031109f21887e6B5afEAaEB002b</span>;</span><br><span class="line">    bool public isComplete;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">authenticate</span>(<span class="params"></span>) <span class="title">public</span> </span>&#123;</span><br><span class="line">        <span class="built_in">require</span>(msg.sender == owner);</span><br><span class="line"></span><br><span class="line">        isComplete = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>题目的意思非常直接，就是要我们获取到地址<code>0x6B477781b0e68031109f21887e6B5afEAaEB002b</code>的私钥。</p>
+<p>我们知道以太坊使用的签名方式是ECDSA椭圆加密，回顾一下椭圆加密算法曾经出现的漏洞，在2010年索尼的ps3游戏机所采用的ECDSA签名算法就被爆出使用的一直是同样的随机数k，这意味着随便找到一个私钥签署的两个签名就能恢复出该私钥。我们顺着这个思路查找到了该地址的第一笔和第二笔交易，可以看到其r值是一样的，也就是说这两笔交易使用来同样的随机数种子k，当然以太坊对随机数冲突做了防护，这里明显是出题人故意使用相同的随机数来部署的交易。</p>
+<p><img src="/home/miyako/.config/Typora/typora-user-images/image-20200526160406416.png" alt="image-20200526160406416"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Typora入门</title>
+    <url>/2020/06/12/Typora%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h1 id="Typora入门"><a href="#Typora入门" class="headerlink" title="Typora入门"></a>Typora入门</h1><p>先试试目录吧</p>
+<p>[toc]</p>
+<p>输入 [ toc ] 然后回车，即可创建一个目录。</p>
+<ul>
+<li>标题：Ctrl + 1 、Ctrl + 2、… 数字对应标题等级。</li>
+</ul>
+<ul>
+<li><p>加粗：Ctrl + B    <strong>wakaka</strong></p>
+</li>
+<li><p>插入链接：Ctrl + K</p>
+</li>
+</ul>
+<p><a href="go/src/github.com/hyperledger/fabric">go/src/github.com/hyperledger/fabric</a></p>
+<ul>
+<li>插入代码：Ctrl + Shift + C    // 貌似不可用， 用三个```</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *BlockValidator)</span> <span class="title">ValidateBody</span><span class="params">(block *types.Block)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="comment">// Check whether the block's known, and if not, that it's linkable</span></span><br><span class="line">	<span class="keyword">if</span> v.bc.HasBlockAndState(block.Hash(), block.NumberU64()) &#123;</span><br><span class="line">		<span class="keyword">return</span> ErrKnownBlock</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Header validity is known at this point, check the uncles and transactions</span></span><br><span class="line">		<span class="keyword">return</span> consensus.ErrPrunedAncestor</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>行内插入代码：Ctrl + Shift + K </p>
+<p>我试试呢，</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *BlockValidator)</span> <span class="title">ValidateBody</span><span class="params">(block *types.Block)</span> <span class="title">error</span></span> &#123;</span><br></pre></td></tr></table></figure>
+
+<p>​                貌似可以，但是没看出来和上面那个有什么区别。</p>
+<ul>
+<li>插入图片：Ctrl + Shift + I</li>
+</ul>
+<p><img src="/home/miyako/.config/Typora/typora-user-images/image-20200521161517446.png" alt=""></p>
+<p>​                    可以可以，但是尼玛我Ctrl + V就直接粘进来了啊！！！</p>
+<ul>
+<li><p>无序列表：Ctrl + Shift + L</p>
+<p>没反应</p>
+</li>
+<li><p>有序列表</p>
+<ol>
+<li>AAA</li>
+<li>BBB</li>
+<li>CCC</li>
+</ol>
+</li>
+<li><p>表格自动生成： Ctrl + T </p>
+<p>还可设置对齐方式(表头与内容之间)，如果不使用对齐标记，内容默认左对齐，表头居中对齐。</p>
+<ul>
+<li>左对齐 ：|</li>
+<li>右对齐 |：</li>
+<li>中对齐 ：|：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">姓名</th>
+<th>性别</th>
+<th>年龄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">卡布达</td>
+<td>公</td>
+<td>3</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">蜻蜓队长</td>
+<td>公</td>
+<td>19</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><p>分割线： 输入 *** 或者 — 再按回车即可绘制一条水平线。</p>
+<hr>
+</li>
+<li><p>斜体： 快捷键 Ctrl + I <em>使用 单个星号 或者 单下划线 可以字体倾斜</em></p>
+</li>
+<li><p>高亮：==亮吧皮卡丘==！！没反应，找找设置里面是不是有开关</p>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/06/12/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+</search>
